@@ -1,12 +1,13 @@
 import java.util.Scanner;
 
 public class RekapNilai {
-    // Pembacaan nilai memakai do-while dengan sentinel -1
-    // Dipilih karena nilai pertama wajib diminta dulu sebelum diperiksa oleh kondisi perulangan.
     static final int SELESAI = -1;
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
+
+        double total = 0;
+        int jumlahSah = 0;
         int pencacahNilai = 1;
         int nilai;
 
@@ -21,11 +22,24 @@ public class RekapNilai {
                 break;
             }
 
-            // Sementara cetak ulang nilai yang dimasukkan
-            System.out.println("Nilai diterima: " + nilai);
+            // Nilai di luar 0-100 ditolak dengan continue, pencacah tidak ikut naik
+            if (nilai < 0 || nilai > 100) {
+                System.out.println("ditolak - nilai harus 0..100");
+                continue;
+            }
+
+            // Akumulator total dengan augmented assignment
+            total += nilai;
+            jumlahSah++;
+
             pencacahNilai++;
 
         } while (true);
+
+        System.out.println("\nNilai sah : " + jumlahSah);
+        if (jumlahSah > 0) {
+            System.out.println("Rata-rata : " + (total / jumlahSah));
+        }
 
         input.close();
     }
